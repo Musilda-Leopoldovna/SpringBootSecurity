@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       lang="ru">
 
 <head>
@@ -39,6 +38,11 @@
                 }
             }
 
+            .error {
+                text-align: center;
+                color: red;
+            }
+
             .card-form {
                 .login-input {
                     margin-top: 24px;
@@ -62,21 +66,23 @@
     </style>
 </head>
 <body>
-<h4><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Выйти</a></h4>
 <h3>Пожалуйста, авторизуйтесь</h3>
-<form class="login" sec:authorize="!isAuthenticated()" th:action="@{/login}" method="post">
+<form class="login" th:action="@{/login}" method="post">
+    <div class='error' th:if="${param.error}">
+        Авторизация не пройдена, проверьте имя пользователя и пароль.
+    </div>
     <div class="card-form">
         <div class="login-input">
             <fieldset class="input_fieldset">
                 <legend class="input_legend">Электронная почта или Имя пользователя</legend>
-                <input type="text" size="40" maxlength="40" name="username" id="username" value=""
+                <input type="text" size="40" maxlength="40" name="username" id="username"
                        aria-label="Электронная почта или Имя пользователя" placeholder="Имя пользователя"/>
             </fieldset>
         </div>
         <div class="password-input">
             <fieldset class="input_fieldset">
                 <legend class="input_legend">Пароль</legend>
-                <input type="password" size="40" minlength="5" maxlength="40" name="password" value=""
+                <input type="password" size="40" minlength="5" maxlength="40" name="password"
                        id="password" aria-label="Пароль" placeholder="Пароль"/>
             </fieldset>
         </div>

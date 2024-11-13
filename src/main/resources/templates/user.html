@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"Данные пользователя"</title>
+    <title>Данные пользователя</title>
 
     <style>
         body {
@@ -60,37 +60,36 @@
             width: fit-content;
             text-align: center;
         }
-        .logout {
-            border: 2px ridge #c0d6e4;
-            border-radius: 5px;
-            padding: 5px 15px;
-            background: #3366CC;
-            cursor: pointer;
+        .logout_button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
         }
     </style>
 </head>
 
 <body>
-<h4><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Выйти</a></h4>
-<!--<button class="logout" type="submit"  th:action="@{/logout}">Выйти</button>-->
-<h3>Данные пользователя</h3>
-<table>
-    <tr>
-        <th title="Идентификатор в БД">ID</th>
-        <th title="Имя">firstName</th>
-        <th title="Фамилия">lastName</th>
-        <th title="Возраст">age</th>
-        <th title="Электронная почта">email</th>
-    </tr>
-    <tbody>
-    <tr th:name="user" th:for="user">
-        <td><span th:text="${user.ID}"> </span></td>
-        <td><span th:text="${user.firstName}"> </span></td>
-        <td><span th:text="${user.lastName}"> </span></td>
-        <td><span th:text="${user.age}"> </span></td>
-        <td><span th:text="${user.email}"> </span></td>
-    </tr>
-    </tbody>
-</table>
+    <form class="logout_button" th:action="@{/logout}" method="post">
+        <button type="submit" sec:authorize="isAuthenticated()">Выйти</button>
+    </form>
+    <h3>Данные пользователя</h3>
+    <table>
+        <tr >
+            <th title="Идентификатор в БД">ID</th>
+            <th title="Имя">firstName</th>
+            <th title="Фамилия">lastName</th>
+            <th title="Возраст">age</th>
+            <th title="Электронная почта">email</th>
+        </tr>
+        <tbody>
+            <tr th:name="user" th:for="user">
+                <td th:text="${user.ID}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.age}"></td>
+                <td th:text="${user.email}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

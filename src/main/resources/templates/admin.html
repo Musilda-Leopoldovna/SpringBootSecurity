@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"Список пользователей"</title>
+    <title>Список пользователей</title>
 
     <style>
         body {
@@ -72,13 +72,6 @@
             cursor: pointer;
             color: white;
         }
-        .logout {
-            border: 2px ridge #c0d6e4;
-            border-radius: 5px;
-            padding: 5px 15px;
-            background: #3366CC;
-            cursor: pointer;
-        }
         .inline-form {
             display: inline-block;
             margin-right: 2px;
@@ -109,12 +102,18 @@
             margin-inline: 20% 5%;
             width: 80%;
         }
+        .logout_button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
     </style>
 </head>
 
 <body>
-<h4><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Выйти</a></h4>
-<!--<button class="logout" type="submit"  th:action="@{/logout}">Выйти</button>-->
+<form class="logout_button" th:action="@{/logout}" method="post">
+    <button type="submit" sec:authorize="isAuthenticated()">Выйти</button>
+</form>
 <h3>Страница редактирования списка пользователей</h3>
 <table>
     <tr>
@@ -127,13 +126,13 @@
     </tr>
     <tbody>
     <tr th:name="user" th:each="user : ${userList}">
-        <td><span th:text="${user.ID}"> </span></td>
-        <td><span th:text="${user.firstName}"> </span></td>
-        <td><span th:text="${user.lastName}"> </span></td>
-        <td><span th:text="${user.age}"> </span></td>
-        <td><span th:text="${user.email}"> </span></td>
+        <td th:text="${user.ID}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.email}"></td>
         <td>
-            <form class="inline-form" th:action="@{/}" method="get">
+            <form class="inline-form" th:action="@{/admin}" method="get">
                 <input type="hidden" name="editId" th:value="${user.ID}" />
                 <input type="submit" name="update" value="upd" title="редактировать" />
             </form>

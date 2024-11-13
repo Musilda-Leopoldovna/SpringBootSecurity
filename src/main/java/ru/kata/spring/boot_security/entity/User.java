@@ -6,18 +6,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 
 @Entity
-@Table
 public class User implements Serializable, UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
@@ -25,12 +23,11 @@ public class User implements Serializable, UserDetails {
     private String lastName;
     private Integer age;
     private String email;
-
     private String username;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private Collection<Role> roles;
 
     public User(){}
     public User(String firstName, String lastName, Integer age, String email) {
@@ -80,11 +77,20 @@ public class User implements Serializable, UserDetails {
         this.email = email;
     }
 
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
 
@@ -100,11 +106,6 @@ public class User implements Serializable, UserDetails {
     @Override
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override
