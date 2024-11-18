@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.entity.User;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 

@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/login", "/logout").permitAll()
+                .antMatchers("/", "/login", "/logout", "/css/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user").access("hasRole('USER') or hasRole('ADMIN')")
                 .anyRequest().authenticated()
@@ -35,7 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .successHandler(successUserHandler)
                 .and()
                 .logout()
-                    .invalidateHttpSession(true);
+                    .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
     }
 
     @Override
