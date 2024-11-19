@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.kata.spring.boot_security.entity.User;
 import ru.kata.spring.boot_security.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.security.Principal;
 

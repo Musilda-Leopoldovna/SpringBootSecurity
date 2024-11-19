@@ -1,8 +1,8 @@
 package ru.kata.spring.boot_security.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 

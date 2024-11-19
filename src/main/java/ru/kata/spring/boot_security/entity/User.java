@@ -1,20 +1,20 @@
 package ru.kata.spring.boot_security.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-public class User implements Serializable, UserDetails {
+public class User implements UserDetails, CredentialsContainer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -126,6 +126,11 @@ public class User implements Serializable, UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public void eraseCredentials() {
+        this.password = null;
     }
 }
 
