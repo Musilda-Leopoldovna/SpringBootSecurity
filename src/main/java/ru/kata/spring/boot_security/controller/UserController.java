@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.kata.spring.boot_security.entity.User;
 import ru.kata.spring.boot_security.service.UserService;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import java.security.Principal;
 
 @Controller
@@ -16,14 +14,6 @@ public class UserController {
     private final UserService service;
     public UserController(UserService service) {
         this.service = service;
-    }
-
-    @GetMapping("/")
-    public String redirectToPage(HttpServletRequest request) {
-        if (request.getUserPrincipal() != null) {
-            return "redirect:/user";
-        }
-        return "redirect:/login";
     }
 
     @GetMapping("/user")

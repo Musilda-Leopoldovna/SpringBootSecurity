@@ -106,3 +106,8 @@ td {
     position: sticky;
     background-color: #3366CC;
 }
+.back {
+    margin-top: 30px;
+    text-align: center;
+    color: navy;
+}
