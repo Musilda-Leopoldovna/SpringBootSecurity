@@ -36,11 +36,12 @@ public class WebSecurityConfig {
                         .loginPage("/login")
                         .successHandler(successUserHandler))
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/login", "/logout", "/css/**").permitAll()
+                        .requestMatchers("/", "/login", "/css/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated())
                 .logout(logout -> logout
+                        .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"));
         return http.build();
