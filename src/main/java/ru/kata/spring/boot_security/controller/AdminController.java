@@ -19,7 +19,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String mainPage(@ModelAttribute User user, Model model,
-                               @RequestParam(value = "editId", required = false) Long editId) {
+                           @RequestParam(value = "editId", required = false) Long editId) {
         if (editId != null) {
             User editUser = service.getUserByID(editId);
             model.addAttribute("editUser", editUser);
@@ -41,7 +41,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/delete")
-    public String deleteRow(@RequestParam(value = "deleteId", required = false) Long deleteId) {
+    public String deleteRow(@RequestParam(value = "deleteId") Long deleteId) {
         if (deleteId != null) {
             service.removeUserByID(deleteId);
         }

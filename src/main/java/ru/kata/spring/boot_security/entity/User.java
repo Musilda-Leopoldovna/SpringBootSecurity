@@ -7,14 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
-import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 @Entity
-public class User implements UserDetails, CredentialsContainer {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +29,6 @@ public class User implements UserDetails, CredentialsContainer {
     private Collection<Role> roles;
 
     public User(){}
-    public User(String firstName, String lastName, Integer age, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
-    }
 
     public long getID() {
         return ID;
@@ -126,11 +119,6 @@ public class User implements UserDetails, CredentialsContainer {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public void eraseCredentials() {
-        this.password = null;
     }
 }
 
